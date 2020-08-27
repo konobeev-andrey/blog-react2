@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,700&display=swap');
+@import url('posts.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('penal.css');
+@import url('popup.css');
+@import url('animation.css');
+
+:root {
+    --color-green: #1CA68A;
+    --color-blue: #457ABF;
+    --color-blue-05: rgba(69, 122, 191, 0.5);
+    --color-blue-deep: #24324F;
+    --color-red: #FF3E4C;
+    --color-border: rgba(36, 50, 79, 0.15);
+    --color-background: #f6f6f6;
+    --content-position: 3/-3;
+    --popup-position: 4/-4;
+    --radius: 6px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+*::selection {
+    color: var(--color-background);
+    background: var(--color-blue);
+}
+
+body {
+    min-width: 320px;
+    background: var(--color-background);
+}
+
+header {
+    height: 146px;
+    font-weight: 300;
+    font-size: 34px;
+    grid-column: 1 / -1;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.preloader__contener {
+    padding: 50px;
+}
+.message {
+    /*display: none;*/
+    position: fixed;
+    left: 50%;
+    top: 47%;
+    z-index: 99;
+    transform: translateX(-50%);
+    text-align: center;
+    background: #fff;
+    padding: 18px 15px;
+    box-shadow: 0 0 20px var(--color-border);
+    border-radius: var(--radius);
+    margin: 10px;
+    overflow: hidden;
+    animation: appear-hint linear 300ms;
+}
+.correct{
+    color: var(--color-green);
+}
+.no-correct{
+    color: var(--color-red);
+}
+
+.message::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 6px;
+    background: var(--color-border);
+    animation: timing linear 2s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

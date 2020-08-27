@@ -1,0 +1,46 @@
+.popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(36, 50, 79, 0.3);
+    backdrop-filter: blur(10px);
+    /*display: none;*/
+    align-items: center;
+    animation: from-opacity linear 300ms;
+}
+
+.popup__wrapper {
+    background: #fff;
+    grid-column: var(--content-position);
+    border-radius: var(--radius);
+    border-bottom: 8px solid #457ABF;
+}
+.popup__wrapper > form{
+    display: grid;
+}
+
+.popup__wrapper > form > .inputs__wrapper > .textarea {
+    padding-top: 13px;
+    height: 246px;
+    resize: none;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 150%;
+}
+
+.popup__wrapper > form > .inputs__wrapper > .title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    color: var(--color-blue-deep);
+}
+
+.popup__wrapper > form > .button__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 140px));
+    column-gap: 24px;
+    padding: 24px;
+    justify-self: right;
+}
