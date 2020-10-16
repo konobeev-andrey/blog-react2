@@ -9,7 +9,7 @@ const Comments = (props) => {
     return <>
             <p className="comments-header">Комментарии</p>
             <div className="comments">
-                {props.comments.map( c => <Comment key={c.id} {...c}/>)}
+                {props.comments[0]? props.comments.map( c => <Comment key={c.id} {...c}/>) : <div>Коментариев нет</div>}
             </div>
     </>
 }

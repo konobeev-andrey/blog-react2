@@ -1,14 +1,13 @@
 import React from "react";
-import SearchPenal from "../SearchPanel/SearchPanel";
-import Button from "../common/Button/Button";
+import SearchPenal from "./SearchPanel/SearchPanel";
+import AddPostPenal from "./AddPostPenal/AddPostPenal";
 
 const Penal = (props) => {
+
     return (
         <div className="penal">
             <SearchPenal/>
-            <div className="panel-add-post__block">
-                <Button onClick={props.isOpenPopup} name={'addPost'} className={'btn-send write-post'}>Добавить статью</Button>
-            </div>
+            <AddPostPenal/>
         </div>
     )
 }

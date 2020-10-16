@@ -41,6 +41,9 @@ export const getCommentsPost = (postId) => {
         if (response.status === 200) {
             dispatch(setCommentsPost(response.data));
         }
+        if (response.status === 404) {
+            console.log('error')
+        }
 
     }
 }

@@ -4,11 +4,12 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {getPostsData} from "../../redux/postsRedusers";
+import Preloader from "../common/Preloader/Preloader";
 
 const PostsContainer = (props) => {
-    useEffect(()=>{
+    useEffect(() => {
         props.getPostsData()
-    },[])
+    }, [])
 
     return <Posts posts={props.posts}/>
 }
@@ -16,11 +17,13 @@ const PostsContainer = (props) => {
 const Posts = (props) => {
     const postsRevers = [...props.posts]
     return <div>
-        {postsRevers.reverse().map(p => <Post
-            key={p.id}
-            id={p.id}
-            title={p.title}
-            body={p.body}/>)}
+        {postsRevers.length === 0
+            ? <Preloader/>
+            : postsRevers.reverse().map(p => <Post
+                key={p.id}
+                id={p.id}
+                title={p.title}
+                body={p.body}/>)}
     </div>
 }
 

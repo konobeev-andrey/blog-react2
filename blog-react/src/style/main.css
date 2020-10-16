@@ -51,6 +51,7 @@ header {
     padding: 50px;
 }
 .message {
+    white-space: pre-line;
     /*display: none;*/
     position: fixed;
     left: 50%;

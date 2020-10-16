@@ -1,24 +1,30 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {toggleWindow} from "../../redux/MessageWindowReducers";
 
 const Message = (props) => {
-    useEffect(() =>{
-        setTimeout(()=>{
-            props.toggleWindow()
-        }, 2000)
-    })
-    const style = props.correct ? "message correct": "message no-correct"
-    return (
-        <div className={style}>
-            {props.text}
-        </div>
-    )
+    const creatMessage = () => {
+        if(props.textMessage) return props.textMessage
+        else if( props.arrayMessage && Object.keys(props.arrayMessage).length === 0) return 'Пост сохранен'
+        else{
+            let message= ''
+            for (let key in props.arrayMessage) {
+                message+= key +': ' + props.arrayMessage[key]+'\n '
+            }
+           return message
+        }
+    }
+
+    const style = props.correct ? "message correct" : "message no-correct"
+
+    return (<div className={style}>
+        {creatMessage()}
+    </div>)
+
 }
-const mstp = (state) =>({
-    OpenWindow:state.messageWindow.OpenWindow
+const mstp = (state) => ({
 })
- export default compose(
+export default compose(
     connect(mstp, {toggleWindow}),
 )(Message)

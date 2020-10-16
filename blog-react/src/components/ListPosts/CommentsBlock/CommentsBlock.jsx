@@ -7,9 +7,9 @@ const CommentsBlock = (props) => {
         <div className="comment__wrapper">
             <form className="formComment">
                 <p className="comments-header">Добавить комментарий</p>
-                <div className="message">
-                    {/*Messegs*/}
-                </div>
+                {/*<div className="message">*/}
+                {/*    /!*Messegs*!/*/}
+                {/*</div>*/}
                 <input type="text" name="имя" className="input" id="nameInComment"
                        placeholder="Введите свое имя"/>
                 <input type="Email" name="еmail" className="input" id="emailInComment"
