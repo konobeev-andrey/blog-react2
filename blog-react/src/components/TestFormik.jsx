@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Formik, Form, Field} from 'formik';
-import Message, {MessageContainer} from "./common/Message";
+import Message from "./common/Message";
 import Button from "./common/Button/Button";
 
 function Required(value) {
@@ -14,29 +14,19 @@ function Required(value) {
 
 export const FieldLevelValidationExample = ( props) => {
     const [displayMessage, setDisplayMessage] = useState(null);
-    let messageTimeout ;
+    const [messageTimeout, setMessageTimeout]  = useState(null);
+
+    useEffect(()=>{
+        return () => clearTimeout(messageTimeout)
+    })
+
+
     const errorMessage = e => {
         if(Object.keys(e).length !== 0){
             setDisplayMessage(e)
-
-            messageTimeout = setTimeout(cloose, 2000)
+            setMessageTimeout(setTimeout(()=> setDisplayMessage(null), 2000))
         }
     }
-    useEffect(()=>{
-       return () => {
-           clear()
-       }
-    })
-    const clear = () => {
-
-        clearTimeout(messageTimeout)
-        // setDisplayMessage(null)
-    }
-    const cloose= () => {
-        setDisplayMessage(null)
-        clear()
-    }
-
 
     const isClosePopup = () => {
         props.isClosePopup(false)

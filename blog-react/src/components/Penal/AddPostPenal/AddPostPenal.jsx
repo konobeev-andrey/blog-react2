@@ -4,11 +4,12 @@ import Popup from "../../Popup/Popup";
 import Message from "../../common/Message";
 import {useComponentVisible} from "../../Popup/UseComponentVisible";
 
-const AddPostPenal = () =>{
+const AddPostPenal = () => {
     const [mes, setMes] = useState(false)
+    const [messageTimeout, setMessageTimeout] = useState(null);
 
-    useEffect(()=>{
-
+    useEffect(() => {
+        return () => clearTimeout(messageTimeout)
     })
 
     const {
@@ -17,7 +18,7 @@ const AddPostPenal = () =>{
         setIsComponentVisible
     } = useComponentVisible(true);
 
-    const isOpenPopup = () =>{
+    const isOpenPopup = () => {
         setIsComponentVisible(false)
 
     }
@@ -26,9 +27,9 @@ const AddPostPenal = () =>{
         setIsComponentVisible(true)
         if (pos) {
             setMes(true)
-            setTimeout(() => {
+            setMessageTimeout(setTimeout(() => {
                 setMes(false)
-            }, 2000)
+            }, 2000))
         }
     }
 
