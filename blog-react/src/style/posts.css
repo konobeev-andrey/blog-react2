@@ -40,18 +40,13 @@ main {
     margin-bottom: 46px;
 }
 
-.preloader__contener > p {
-    text-align: center;
-}
-
-
 .post__page {
     background: #fff;
     height: 100vh;
 }
 
 .breadcrumb {
-    margin: 24px 0 0 24px;
+    margin: 32px  24px;
     color: var(--color-blue-deep);
 }
 
@@ -79,7 +74,7 @@ main {
     background: #fff;
     border-radius: var(--radius);
     overflow: hidden;
-    grid-column: var(--content-position);
+    margin-bottom: 46px;
 }
 
 .fullPost>.post {
@@ -123,4 +118,8 @@ main {
 
 .comments {
     padding: 0 24px;
+}
+
+.fullPostContainer {
+    grid-column: var(--content-position);
 }

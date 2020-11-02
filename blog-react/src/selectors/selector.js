@@ -1,3 +1,3 @@
-export const getIdNewPost = (statePosts) => {
-    return 1 + statePosts.length
+export const getNewId = (value) => {
+    return 1 + value.length
 }

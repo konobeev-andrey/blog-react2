@@ -1,30 +1,51 @@
-import React from "react";
-import {compose} from "redux";
-import {connect} from "react-redux";
-import {toggleWindow} from "../../redux/MessageWindowReducers";
+import React, {useEffect, useState} from "react";
 
 const Message = (props) => {
+
     const creatMessage = () => {
-        if(props.textMessage) return props.textMessage
-        else if( props.arrayMessage && Object.keys(props.arrayMessage).length === 0) return 'Пост сохранен'
-        else{
-            let message= ''
-            for (let key in props.arrayMessage) {
-                message+= key +': ' + props.arrayMessage[key]+'\n '
+        if (typeof props.objectMessage === "string") return props.objectMessage
+        else {
+            let message = ''
+            for (let key in props.objectMessage) {
+                message += key + ': ' + props.objectMessage[key] + '\n '
             }
-           return message
+            return message
         }
     }
 
-    const style = props.correct ? "message correct" : "message no-correct"
-
+    let style;
+    if (props.correct === undefined) {
+        style = Object.keys(props.objectMessage).length === 0 || typeof props.objectMessage === "string" ? "message correct" : "message no-correct"
+    } else {
+        style = props.correct ? "message correct" : "message no-correct"
+    }
     return (<div className={style}>
         {creatMessage()}
     </div>)
 
 }
-const mstp = (state) => ({
-})
-export default compose(
-    connect(mstp, {toggleWindow}),
-)(Message)
+export const useMessageContainer = () => {
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [messageTimeout, setMessageTimeout] = useState(null);
+
+    useEffect(() => {
+        return () => clearTimeout(messageTimeout)
+    })
+
+    const displayErrorMessage = e => {
+        if (typeof e === "string" || Object.keys(e).length !== 0) {
+            if (messageTimeout) {
+                setErrorMessage(null)
+                setMessageTimeout(null)
+            }
+            setErrorMessage(e)
+            setMessageTimeout(setTimeout(() => {
+                setErrorMessage(null)
+                setMessageTimeout(null)
+            }, 2000))
+        }
+    }
+    return [errorMessage, displayErrorMessage]
+}
+
+export default Message;

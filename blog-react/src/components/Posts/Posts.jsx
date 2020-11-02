@@ -1,53 +1,53 @@
 import React, {useEffect} from "react";
-import Post from "./Post";
+import PostInListPosts from "./PostInListPosts";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {getPostsData} from "../../redux/postsRedusers";
 import Preloader from "../common/Preloader/Preloader";
-
-
-const regx = new RegExp('', 'gi');
-const searchRegexp= (reg, text) => {
-    return reg.test(text)
-}
-const searchPost = (arrPost,reg) => {
-    return arrPost.filter(post => searchRegexp(reg, post.title) || searchRegexp(reg, post.body))
-}
-
+import NotFound from "../common/NotFound/NotFound";
 
 
 const PostsContainer = (props) => {
     useEffect(() => {
         props.getPostsData()
-    }, [])
+    },[])
 
-    return <Posts posts={props.posts}/>
+    return <Posts {...props}/>
 }
 
+
 const Posts = (props) => {
-    const postsRevers = [...props.posts]
+
+    const regx = new RegExp(props.valueSearch, 'gi');
+    const searchRegexp = (reg, text) => {
+        return reg.test(text)
+    }
+    const searchPost = (arrPost, reg) => {
+        if (props.valueSearch === '') return arrPost
+        return arrPost.filter(post => searchRegexp(reg, post.title) || searchRegexp(reg, post.body))
+    }
+
+    const postsFound = searchPost([...props.posts], regx).reverse().map(p => <PostInListPosts
+        key={p.id}
+        id={p.id}
+        reg={regx}
+        title={p.title}
+        body={p.body}/>)
+    const postRender = postsFound.length !== 0
+        ? postsFound
+        : <NotFound text={`Статей по запросу «${props.valueSearch}» не найдено`}/>
+
     return <div>
-        {/*{postsRevers.length === 0*/}
-        {/*    ? <Preloader/>*/}
-        {/*    : postsRevers.reverse().map(p => <Post*/}
-        {/*        key={p.id}*/}
-        {/*        id={p.id}*/}
-        {/*        title={p.title}*/}
-        {/*        body={p.body}/>)}*/}
-        {postsRevers.length === 0
+        {props.posts.length === 0
             ? <Preloader/>
-            : searchPost(postsRevers, regx).reverse().map(p => <Post
-                key={p.id}
-                id={p.id}
-                reg={regx}
-                title={p.title}
-                body={p.body}/>)}
+            : postRender}
     </div>
 }
 
 const mstp = (state) => ({
-    posts: state.posts.data
+    posts: state.posts.data,
+    valueSearch: state.valueSearch.valueSearch
 })
 export default compose(
     connect(mstp, {getPostsData}),

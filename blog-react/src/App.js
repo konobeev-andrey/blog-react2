@@ -8,8 +8,7 @@ import {compose} from "redux";
 import store from './redux/state'
 import ListPosts from "./components/ListPosts/ListPosts";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import {toggleWindow} from "./redux/MessageWindowReducers";
-import Basic from './components/TestFormik'
+import Basic from './components/AddPostFormik'
 
 
 function App(props) {
@@ -41,7 +40,7 @@ function App(props) {
 const mstp = (state) => ({})
 const AppContainer = compose(
     withRouter,
-    connect(mstp, {toggleWindow}),
+    connect(mstp, {}),
 )(App);
 
 const AppBlog = () => {

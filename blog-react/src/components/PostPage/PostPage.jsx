@@ -3,27 +3,29 @@ import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {getPostOpen} from "../../redux/postRedusers";
 import {connect} from "react-redux";
-import CommentsBlock from "../ListPosts/CommentsBlock/CommentsBlock";
+import NotFound from "../common/NotFound/NotFound";
+import Preloader from "../common/Preloader/Preloader";
+import PostInPostPage from "./PostInPostPage";
 
 const PostPage = (props) => {
 
     return <>
-        <main className="fullPost">
-            <div className="breadcrumb">
-                <a href="/">Главная страница</a> Статья
+        <main className="fullPostContainer">
+            <div className="fullPost">
+                <div className="breadcrumb">
+                    <a href="/">Главная страница </a> Статья
+                </div>
+                {!(Object.keys(props.post).length === 0) && !props.post.error && <PostInPostPage post={props.post}/>}
             </div>
-            <div className="post">
-                <h1 className="post__title">{props.post.title}</h1>
-                <p className="post__body">{props.post.body}</p>
-            </div>
-            <CommentsBlock/>
+            {props.post.error && <NotFound text={'Статья не найдена'}/>}
+            {Object.keys(props.post).length === 0 && <Preloader/>}
         </main>
     </>
 }
 
-const PostPageContainer = (props) =>{
+const PostPageContainer = (props) => {
 
-    useEffect(()=>{
+    useEffect(() => {
         let postId = props.match.params.id;
         props.getPost(postId)
     }, [])
@@ -35,5 +37,5 @@ const mstp = (state) => ({
 })
 export default compose(
     withRouter,
-    connect(mstp,{getPost: getPostOpen})
+    connect(mstp, {getPost: getPostOpen})
 )(PostPageContainer);

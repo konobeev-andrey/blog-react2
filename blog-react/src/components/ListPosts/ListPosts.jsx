@@ -7,8 +7,6 @@ const ListPosts = (props) => {
     return <>
         <Penal />
         <main className="posts">
-            {/*preloader...*/}
-            {/* postNotFound...*/}
             <Posts/>
         </main>
         </>

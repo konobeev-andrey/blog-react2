@@ -47,9 +47,13 @@ header {
     justify-items: center;
 }
 
-.preloader__contener {
-    padding: 50px;
+.preloader__container {
+    width: 64px;
+    height: 64px;
+    background-image: url('../components/common/Preloader/preloaderSVG.svg');
+    margin: 0 auto;
 }
+
 .message {
     white-space: pre-line;
     /*display: none;*/
@@ -67,10 +71,12 @@ header {
     overflow: hidden;
     animation: appear-hint linear 300ms;
 }
-.correct{
+
+.correct {
     color: var(--color-green);
 }
-.no-correct{
+
+.no-correct {
     color: var(--color-red);
 }
 

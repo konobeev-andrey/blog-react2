@@ -34,6 +34,7 @@ export const setPost = (post) => ({
 })
 
 export const getPostsData = () => {
+
     return async (dispatch) => {
         let response = await postsApi.getPosts()
         if (response.status === 200) {

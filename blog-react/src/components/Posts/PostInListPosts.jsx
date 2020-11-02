@@ -1,9 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-
-
-const Post = (props) => {
+const PostInListPosts = (props) => {
     const title = props.title.replace(props.reg, "<span style='background:rgba(69, 122, 191, 0.5); color:#fff'>$&</span>")
     const body = props.body.replace(props.reg, "<span style='background:rgba(69, 122, 191, 0.5); color:#fff'>$&</span>")
 
@@ -17,4 +15,4 @@ const Post = (props) => {
     )
 }
 
-export default Post;
+export default PostInListPosts;

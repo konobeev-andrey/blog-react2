@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default Comment = (props) => {
+const  Comment = (props) => {
     return (
         <div className="comment">
             <p className="name">{props.name} <span>{props.email}</span></p>
@@ -9,3 +9,4 @@ export default Comment = (props) => {
         </div>
     )
 }
+export default Comment;

@@ -4,12 +4,13 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {getCommentsPost} from "../../../../redux/postRedusers";
 import Comment from "./Comment";
+import NotFound from "../../../common/NotFound/NotFound";
 
 const Comments = (props) => {
     return <>
             <p className="comments-header">Комментарии</p>
             <div className="comments">
-                {props.comments[0]? props.comments.map( c => <Comment key={c.id} {...c}/>) : <div>Коментариев нет</div>}
+                {props.comments[0]? props.comments.map( c => <Comment key={c.id} {...c}/>) : <NotFound text={'Коментариев нет'}/>}
             </div>
     </>
 }
